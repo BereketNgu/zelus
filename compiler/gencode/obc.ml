@@ -52,7 +52,7 @@ type exp =
   (*added here*)
   | Omove of exp
   (*added here*)
-  | Ocontrol of exp
+  | Ocontrol of exp * exp
   | Omethodcall of method_call			       
   | Oinst of inst
                           

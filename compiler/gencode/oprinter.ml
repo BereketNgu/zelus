@@ -29,7 +29,7 @@ let rec priority_exp = function
   | Otypeconstraint _ | Otuple _ -> 3
   | Oconstr1 _ | Oapp _ | Omethodcall _
     | Ovec _ | Oupdate _ | Oslice _ | Oconcat _ -> 2
-  | (*added here*) Omove _ -> 0 
+  | (*added here*) Omove _ -> 0 | (*added here *)Ocontrol _ -> 0
   | Oifthenelse _  -> 0 | Oinst i -> priority_inst i
 
 and priority_inst = function
@@ -256,7 +256,7 @@ and exp prio ff e =
       print_endline("Omove printing");
       fprintf ff "print_endline(\"robot is moving\")"
   (*added here*)
-  | Ocontrol (e) -> 
+  | Ocontrol (e1, e2) -> 
       print_endline("Ocontrol printing");
       fprintf ff "print_endline(\"robot is moving\")"   
   | Oinst(i) -> inst prio ff i
