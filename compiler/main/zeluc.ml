@@ -98,7 +98,7 @@ and doc_deps = "\t Recursively compile dependencies"
 (* added here *)
 and doc_robot = "\t Enable robot mode"
 (* added here *)
-and doc_robot_control = "\t Enable robot_control mode"
+and doc_robotc = "\t Enable robot_control mode"
 let errmsg = "Options are:"
 
 let set_verbose () =
@@ -156,7 +156,7 @@ let main () =
           (* added here *)
           "-robot", Arg.Set robot, doc_robot;
           (* added here *)
-          "-robot_control", Arg.Set robot_control, doc_robot_control;
+          "-robotc", Arg.Set robotc, doc_robotc;
         ])
       (fun filename -> if !build_deps then build filename else compile filename)
       errmsg;
