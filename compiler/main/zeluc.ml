@@ -97,8 +97,7 @@ and doc_rif = "\t Use RIF format over stdin and stdout to communicate I/O to the
 and doc_deps = "\t Recursively compile dependencies"
 (* added here *)
 and doc_robot = "\t Enable robot mode"
-(* added here *)
-and doc_robotc = "\t Enable robot_control mode"
+
 let errmsg = "Options are:"
 
 let set_verbose () =
@@ -155,8 +154,6 @@ let main () =
           "-deps", Arg.Set build_deps, doc_deps;
           (* added here *)
           "-robot", Arg.Set robot, doc_robot;
-          (* added here *)
-          "-robotc", Arg.Set robotc, doc_robotc;
         ])
       (fun filename -> if !build_deps then build filename else compile filename)
       errmsg;
