@@ -53,6 +53,8 @@ type exp =
   | Omove of exp
   (*added here*)
   | Ocontrol of exp * exp
+  (*added here*)
+  | Ostore of string * float
   | Omethodcall of method_call			       
   | Oinst of inst
                           
