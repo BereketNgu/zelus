@@ -8,7 +8,8 @@
 //#define MBOT_MOTOR_TRANSVERSE_CHANNEL "MBOT_MOTOR_TRANSVERSE"
 
 // Sends motor commands to the robot
-CAMLprim value robot_store_c(value command, value key) //, value magnitude)
+CAMLprim value 
+robot_store_c(value command, value magnitude)
 {
         
 	printf("Command: %s\n", (String_val(command)));
