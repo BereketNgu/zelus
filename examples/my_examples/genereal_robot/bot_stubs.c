@@ -13,7 +13,7 @@ robot_store_c(value command, value magnitude)
 {
         
 	printf("Command: %s\n", (String_val(command)));
-	printf("Magnitude: %f\n", (Double_val(key)));
+	printf("Magnitude: %f\n", (Double_val(command)));
 	
 	//printf("hello world\n");
 	//printf("%f\n", Double_val(magnitude));
