@@ -117,6 +117,7 @@ and desc =
   (*added here
   | Emove of exp*)
   | Estore of string * float (*custom keyword*)
+  | Eget of string  (*custom keyword*)
   | Eblock of eq list block * exp
 
 and is_rec = bool
