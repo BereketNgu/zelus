@@ -196,6 +196,9 @@ let rec types env ty =
     | Etypetuple(ty_list) -> Zelus.Etypetuple(List.map (types env) ty_list)
     | Etypeconstr(lname, ty_list) ->
        Zelus.Etypeconstr(longname lname, List.map (types env) ty_list)
+    (*added here   
+    | Eipoptype(e_list) ->
+       Zelus.Eipoptype(expression_types env e_list)*)   
     | Etypefun(k, n_opt, ty_arg, ty_res) ->
        let ty_arg = types env ty_arg in
        let env =
@@ -233,6 +236,10 @@ let operator loc env = function
   | Econtrol -> Zelus.Econtrol
   (*added here*)
   | Estr -> Zelus.Estr
+  (*added here*)
+  | Einp -> Zelus.Einp
+  (*added here*)
+  | Eoup -> Zelus.Eoup
   | Einitial -> Zelus.Einitial
   | Edisc -> Zelus.Edisc
   | Etest -> Zelus.Etest
@@ -967,6 +974,9 @@ let implementation imp =
     let desc = match imp.desc with
       | Econstdecl(n, is_static, e) ->
          Zelus.Econstdecl(n, is_static, expression Rename.empty e)
+      (*added here*)
+      | Eipopannotation(n, e1, e2) ->
+      	 Zelus.Eipopannotation(n, expression Rename.empty e1, expression Rename.empty e2)   
       | Efundecl(n, { f_kind = k; f_atomic = is_atomic; f_args = p_list;
 		      f_body = e; f_loc = loc }) ->
          let _, env, p_list = pattern_list Rename.empty p_list in

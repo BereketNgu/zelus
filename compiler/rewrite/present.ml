@@ -397,6 +397,11 @@ let implementation impl =
     | Econstdecl(n, is_static, e) ->
        let e = exp Env.empty e in
        { impl with desc = Econstdecl(n, is_static, e) }
+    (*added here*)
+    | Eipopannotation(n, e1, e2) ->
+       let e1 = exp Env.empty e1 in
+       let e2 = exp Env.empty e2 in
+       { impl with desc = Eipopannotation(n, e1, e2) }   
     | Efundecl(n, ({ f_args = p_list; f_body = e; f_env = f_env } as body)) ->
         let signals, _, f_env = build Env.empty f_env in
 	let p_list = List.map (pattern signals) p_list in

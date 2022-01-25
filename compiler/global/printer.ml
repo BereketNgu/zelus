@@ -118,6 +118,8 @@ and ptype ff ty =
 	if prio > prio_op then fprintf ff ")" in
   match ty.desc with
     | Etypevar(s) -> fprintf ff "'%s" s
+    (*added here
+    | Eipoptype(_) -> ptype ff ty*)
     | Etypeconstr(ln, ty_list) ->
         fprintf ff "@[<hov2>%a@]%a"
           (print_list_r_empty ptype "("","")") ty_list
@@ -531,6 +533,10 @@ let implementation ff impl =
     | Econstdecl(n, is_static, e) ->
         fprintf ff "@[<v 2>let %s%a =@ %a@.@.@]"
           (if is_static then "static " else "") shortname n expression e
+    (*added here*)
+    | Eipopannotation(n,e1,e2) -> 
+          fprintf ff "@[<v 2>let %s%a =@ %a@.@.@]"
+             ("") shortname n expression e2
     | Efundecl(n, body) ->
        fprintf ff "@[<v 2>let %a =@ %a@.@]" shortname n funexp body
 

@@ -181,6 +181,9 @@ let implementation impl =
     | Eopen _ | Etypedecl _ -> impl
     | Econstdecl(n, is_static, e) ->
        { impl with desc = Econstdecl(n, is_static, exp e) }
+    (*added here*)
+    | Eipopannotation(n, e1, e2) ->
+       { impl with desc = Eipopannotation(n, exp e1, exp e2) }   
     | Efundecl(n, ({ f_body = e } as body)) ->
         { impl with desc = Efundecl(n, { body with f_body = exp e }) }
 

@@ -147,15 +147,19 @@ let block l lo eq_list startpos endpos =
 (*added here*)
 %token ASSUME         /* "assume" */
 (*added here*)
-%token R_MOVE        /* "move_robot_zls" */
+%token R_MOVE         /* "move_robot_zls" */
 (*added here*)
 %token R_CONTROL      /* "control_robot_zls" */
 (*added here*)
 %token R_STORE        /* "robot_store" */
 (*added here*)
-%token R_STR        /* "robot_str" */
+%token R_STR          /* "robot_str" */
 (*added here*)
-%token R_GET        /* "robot_get" */
+%token R_GET          /* "robot_get" */
+(*added here*)
+%token IP             /* "ip" */
+(*added here*)
+%token OP             /* "op" */
 %token EXCEPTION      /* "exception" */
 %token EXTERNAL       /* "external" */
 %token IN             /* "in" */
@@ -310,6 +314,11 @@ implementation:
       { Econstdecl(ide, false, seq) }
   | LET STATIC ide = ide EQUAL seq = seq_expression
       { Econstdecl(ide, true, seq) }
+    (*added here, varable annotation using ip and op keywords*)
+  | LET ide = ide LBRACE seq1= expression RBRACE EQUAL seq2= seq_expression
+      { Eipopannotation (ide, seq1, seq2) }
+  (*| LET ide = ide LBRACE OP seq1 =seq_expression RBRACE EQUAL seq2= seq_expression
+      { Econstdecl (ide, false, seq2)}*)        
   | LET ide = ide fn = simple_pattern_list EQUAL seq = seq_expression
       { Efundecl(ide, { f_kind = A; f_atomic = false;
 			f_args = fn; f_body = seq;
@@ -695,6 +704,12 @@ scondpat_desc :
   (*added here*)
   | R_STR e = simple_expression
       { Econdexp (make (Eop(Estr, [e])) $startpos $endpos)}
+  (*added here*)
+  (*| IP e= simple_expression
+      { Econdexp (make (Eop(Einp, [e])) $startpos $endpos)}*)
+  (*added here*)
+  | OP e= simple_expression
+      { Econdexp (make (Eop(Eoup, [e])) $startpos $endpos)}
   (*added here
   | R_STORE rob = robot_expression
        {Econdexp (make (Eop(Estore, [rob])) $startpos $endpos)}*)
@@ -977,6 +992,12 @@ expression_desc:
   (*added here*)
   | R_STR LPAREN e1= expression COMMA e2=expression RPAREN
       { Eop(Estr, [e1;e2])}
+  (*added here*)    
+  | e1= expression LBRACE IP QUOTE e2=expression QUOTE RBRACE
+      { Eop(Einp, [e1;e2])}
+  (*added here*)    
+  | OP e=expression 
+      { Eop(Eoup, [e])}
   (*added here
   | R_STORE rob = robot_expression
       { Eop(Estore, [rob])}*)
@@ -1079,6 +1100,11 @@ robot_expression:
 rbt_expression:
   | LPAREN r_cm = STRING   RPAREN
       {{cm = r_cm}}  
+(*added here
+ip_op_expression:
+  | OP chan= expression
+      {{channel= chan}}
+;*)      
 constructor:
   | c = CONSTRUCTOR
       { Name(c) } %prec prec_ident
@@ -1193,6 +1219,8 @@ type_expression:
   | LPAREN id = IDENT COLON t_arg = type_expression RPAREN
 			    a = arrow t_res = type_expression
       { make(Etypefun(a, Some(id), t_arg, t_res)) $startpos $endpos}
+  (*added here
+  | LBRACE seq = seq_expression RBRACE {make(Eipoptype(seq)) $startpos $endpos}*)     
 ;
 
 simple_type:
