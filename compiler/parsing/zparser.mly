@@ -315,7 +315,7 @@ implementation:
   | LET STATIC ide = ide EQUAL seq = seq_expression
       { Econstdecl(ide, true, seq) }
     (*added here, varable annotation using ip and op keywords*)
-  | LET ide = ide LBRACE seq1= expression RBRACE EQUAL seq2= seq_expression
+  | LET ide = ide LBRACE OP seq1= expression RBRACE EQUAL seq2= seq_expression
       { Eipopannotation (ide, seq1, seq2) }
   (*| LET ide = ide LBRACE OP seq1 =seq_expression RBRACE EQUAL seq2= seq_expression
       { Econstdecl (ide, false, seq2)}*)        
