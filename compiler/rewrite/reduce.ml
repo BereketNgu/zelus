@@ -598,7 +598,7 @@ let implementation_list ff impl_list =
        { impl with desc = Econstdecl(f, is_static, e) } ::
 	 List.fold_right make fun_defs impl_defs
     (*added here*)
-    | Eipopannotation(f, e1, e2) ->
+    | Eipopannotation(f, e1, e2, is_op) ->
        let e2, { fundefs = fun_defs } =
          if false then
            try
@@ -610,7 +610,7 @@ let implementation_list ff impl_list =
            with
              Static.Error _ -> expression Env.empty Env.empty empty e2
          else expression Env.empty Env.empty empty e2 in
-       { impl with desc = Eipopannotation(f, e1, e2) } ::
+       { impl with desc = Eipopannotation(f, e1, e2, is_op) } ::
 	 List.fold_right make fun_defs impl_defs   
     | Efundecl(f, funexp) ->
        let ({ info = { value_typ = tys } } as entry) =

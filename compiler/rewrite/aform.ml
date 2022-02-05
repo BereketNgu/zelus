@@ -246,8 +246,8 @@ let implementation impl =
     | Econstdecl(n, is_static, e) ->
        { impl with desc = Econstdecl(n, is_static, expression Env.empty e) }
     (*added here*)
-    | Eipopannotation(n, e1, e2) ->
-       { impl with desc = Eipopannotation(n, expression Env.empty e1, expression Env.empty e2) }   
+    | Eipopannotation(n, e1, e2, is_op) ->
+       { impl with desc = Eipopannotation(n, expression Env.empty e1, expression Env.empty e2, is_op) }   
     | Efundecl(n, ({ f_body = e; f_env = f_env; f_args = p_list } as body)) ->
        let subst, f_env = build f_env Env.empty in
        let p_list = List.map (pattern subst) p_list in

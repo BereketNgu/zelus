@@ -260,8 +260,8 @@ let implementation impl =
   | Econstdecl(n, is_static, e) ->
      { impl with desc = Econstdecl(n, is_static, make_let e) }
   (*added here*)
-  | Eipopannotation(n, e1, e2) ->
-     { impl with desc = Eipopannotation(n, make_let e1, make_let e2) }   
+  | Eipopannotation(n, e1, e2, is_op) ->
+     { impl with desc = Eipopannotation(n, make_let e1, make_let e2, is_op) }   
   | Efundecl(n, ({ f_kind = k; f_body = e } as body)) ->
      { impl with desc = Efundecl(n, { body with f_body = make_let e }) }
        

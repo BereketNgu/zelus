@@ -529,10 +529,10 @@ let implementation impl =
         let e = exp S.empty e in
         { impl with desc = Econstdecl(n, is_static, e) }
     (*added here*)
-    | Eipopannotation(n, e1, e2) -> 
+    | Eipopannotation(n, e1, e2, is_op) -> 
         let e1 = exp S.empty e1 in
         let e2 = exp S.empty e2 in
-        { impl with desc = Eipopannotation(n, e1, e2) }    
+        { impl with desc = Eipopannotation(n, e1, e2, is_op) }    
     | Efundecl(n, ({ f_body = e } as body)) ->
         { impl with desc = Efundecl(n, { body with f_body = exp S.empty e }) }
 

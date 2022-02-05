@@ -975,8 +975,8 @@ let implementation imp =
       | Econstdecl(n, is_static, e) ->
          Zelus.Econstdecl(n, is_static, expression Rename.empty e)
       (*added here*)
-      | Eipopannotation(n, e1, e2) ->
-      	 Zelus.Eipopannotation(n, expression Rename.empty e1, expression Rename.empty e2)   
+      | Eipopannotation(n, e1, e2, is_op) ->
+      	 Zelus.Eipopannotation(n, expression Rename.empty e1, expression Rename.empty e2, is_op)   
       | Efundecl(n, { f_kind = k; f_atomic = is_atomic; f_args = p_list;
 		      f_body = e; f_loc = loc }) ->
          let _, env, p_list = pattern_list Rename.empty p_list in

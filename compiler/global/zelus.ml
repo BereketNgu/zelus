@@ -73,7 +73,7 @@ and implementation_desc =
   | Eopen of name
   | Etypedecl of name * name list * type_decl
   | Econstdecl of name * is_static * exp
-  | Eipopannotation of name * exp * exp
+  | Eipopannotation of name * exp * exp * is_op
   | Efundecl of name * funexp
 			 
 and funexp =
@@ -87,6 +87,8 @@ and funexp =
 and is_atomic = bool
 
 and is_static = bool
+
+and is_op = bool
 		  
 and exp = 
   { mutable e_desc: desc; (* descriptor *)

@@ -534,7 +534,7 @@ let implementation ff impl =
         fprintf ff "@[<v 2>let %s%a =@ %a@.@.@]"
           (if is_static then "static " else "") shortname n expression e
     (*added here*)
-    | Eipopannotation(n,e1,e2) -> 
+    | Eipopannotation(n,e1,e2, is_op) -> 
           fprintf ff "@[<v 2>let %s%a =@ %a@.@.@]"
              ("") shortname n expression e2
     | Efundecl(n, body) ->

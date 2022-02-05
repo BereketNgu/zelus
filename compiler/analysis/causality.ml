@@ -760,7 +760,7 @@ let implementation ff { desc = desc; loc = loc } =
        (* output the signature *)
        if !Zmisc.print_causality_types then Pcaus.declaration ff f tcs
     (*added here*)
-    | Eipopannotation(f,e1,e2) ->
+    | Eipopannotation(f,e1,e2,_) ->
        Zmisc.push_binding_level ();
        let tc = exp Env.empty (Causal.new_var ()) e2 in
        Zmisc.pop_binding_level ();

@@ -55,7 +55,7 @@ and add_implem bv i =
   | Etypedecl (_, _, td) -> add_type_decl bv td
   | Econstdecl (_, _, e) -> add_exp bv e
   (*added here*)
-  | Eipopannotation (_,_,e) -> add_exp bv e
+  | Eipopannotation (_,_,e,_) -> add_exp bv e
   | Efundecl (_, { f_args; f_body; _ }) ->
      List.iter (add_pattern bv) f_args;
      add_exp bv f_body
